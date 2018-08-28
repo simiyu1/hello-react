@@ -8,7 +8,8 @@ class Auth extends Component {
 		showAlert: false,
 		error_message: "",
 		headerRequired: false,
-		redirectToReferrer:false
+		redirectToReferrer:false,
+		isauthenticated: false
 	  }
 	
 	  handleChange = (e) => {
@@ -16,13 +17,12 @@ class Auth extends Component {
 		const user_details = Object.assign({}, this.state.user_details)
 		user_details[id] = e.target.value
 		this.setState({user_details})
-	    // console.log(this.state.user_details)
+	    console.log(this.state.user_details)
 	  }
 	
 	  handleSubmit = (e) => {
 		e.preventDefault()
 		this.setState({showAlert:false})
-		console.log("KKKK")
 		send(this.state.user_details, 'POST', '/api/v1/auth/login', this.state.headerRequired)
 		.then(response => response.json())
 		.catch(err => console.log("Error",err ))
@@ -30,13 +30,16 @@ class Auth extends Component {
 			console.log(data)
 			this.setState({
 			showAlert: !this.state.showAlert,
-			error_message: data.msg
+			error_message: data.msg,
+			isauthenticated: true,
+			user_details: {name: "", username: data.username, email: "", password: "", confirm_password: ""}
 		  })})
 	  }
 
   render() {
     return (
         <div className="login-wrap">
+
             <div className="login-html">
                 <input id="tab-1" type="radio" name="tab" className="sign-in" defaultChecked/><label htmlFor="tab-1" className="tab">Sign In</label>
                 <input id="tab-2" type="radio" name="tab" className="sign-up"/><label htmlFor="tab-2" className="tab">Sign Up</label>
@@ -51,7 +54,7 @@ class Auth extends Component {
                             <input id="password" type="password" className="input" data-type="password" onChange={this.handleChange}/>
                         </div>
 						<div className="group">
-                            <label htmlFor="pass" className="label">Password</label>
+                            <label htmlFor="pass" className="label">Email</label>
                             <input id="email" type="email" className="input" data-type="text" onChange={this.handleChange}/>
                         </div>
                         <div className="group">
