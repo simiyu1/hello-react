@@ -1,53 +1,75 @@
 import React, { Component } from 'react';
 import './user-area.css';
-import Header from '../header';
-import {BrowserRouter, Switch, Route,Redirect} from 'react-router-dom';
+import Header, {UserHeader} from '../header';
+import {BrowserRouter, Switch,Link, Route,Redirect} from 'react-router-dom';
 
 import Auth from '../auth-pages';
+import Reset from '../auth-pages/reset';
 import Library from '../library';
+import BorrowBook from '../library/borrow';
+import ReturnBook from '../library/returnbook';
+import MyBook from '../library/mybooks';
+import MyHistory from '../library/myhistory';
+import About from './about';
+import ReachUs from './reach';
+import {saveStateToLocalStorage, hydrateStateWithLocalStorage } from '../Helper';
+import CheckoutBook from '../library/checkoutbook';
+import MyReturned from '../library/myreturned';
+
+import swal from 'sweetalert';
 
 const Root = () => (
   <h2> Home Component</h2>
-)
-const BorrowBook = () =>(
-  <h2>Serch Component</h2>
-)
-const About = () =>(
-  <h2>Your simple library</h2>
 )
 
 
 const PrivateRoute = ({component: Component, ...rest}) =>(
   <Route {...rest} render={(props) => (
-    Auth.state.isAuthenticated === true
+    localStorage.getItem("isauthenticated") === "true"
     ? <Component {...props}/>
-    : <Redirect to='/login'/>
+    :  <Redirect to='/login'/>
   )} /> 
 )
 
-const CheckAuth={
-  fkisAuthenticated: false,
-  authenticate(cb){
-    this.fkisAuthenticated = true
-    setTimeout(cb, 100)
-  },
-  signout(cb){
-    this.fkisAuthenticated = false
-    setTimeout(cb, 100)
-  }
-}
+// const CheckAuth={
+//   fkisAuthenticated: localStorage.isauthenticated
+// }
 
-const AuthDiv = ({history}) =>(
-  CheckAuth.isAuthenticated === true
-  ? <Header subtitle="Hello Books Logged in" />
-  : <Header subtitle="Hello Books Not logged in" />
+const AuthDiv = () =>(
+  localStorage.getItem("isauthenticated") === "true"
+  ? <UserHeader/>
+  : <Header subtitle={<li><Link to='/login/'>Please login</Link></li>}/>
 )
 
 
 class App extends Component {
+
+  componentDidMount() {
+    hydrateStateWithLocalStorage();
+
+    // add event listener to save state to localStorage
+    // when user leaves/refreshes the page
+    window.addEventListener(
+      "beforeunload",
+      saveStateToLocalStorage()
+    );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "beforeunload",
+      saveStateToLocalStorage()
+    );
+
+    // saves if component has a chance to unmount
+    saveStateToLocalStorage();
+  }
+
+  
   
 
   render() {
+    
     return (
       // <div className="container">
       //   <Header subtitle="Hello Books"/>
@@ -55,7 +77,9 @@ class App extends Component {
       // </div>
       <BrowserRouter>
       <div className="App">
-        <AuthDiv />
+      <AuthDiv/>
+      {console.log("------Rendering-----",localStorage.getItem("isauthenticated"))}
+        
         {/* <ul>
           <li><Link to='/home/'>Home</Link></li>
           <li><Link to='/search'>Browse</Link></li>
@@ -66,7 +90,15 @@ class App extends Component {
           <Route path='/library' component={Library}/>
           <Route path='/login' component={Auth}/>
           <Route path='/about' component={About}/>
-          <PrivateRoute path='/borrow' component={BorrowBook}/>
+          <Route path='/reach-us' component={ReachUs}/>
+          <Route path='/checkoutbook' component={CheckoutBook}/>
+          <PrivateRoute exact path='/borrow/:id' component={BorrowBook}/>
+          <PrivateRoute exact path='/borrowed' component={MyBook}/>
+          <PrivateRoute exact path='/returned' component={MyReturned}/>
+          <PrivateRoute exact path='/history/' component={MyHistory}/>
+          <PrivateRoute exact path='/return/:id' component={ReturnBook}/>
+          <PrivateRoute exact path='/reset' component={Reset}/>
+          {/* <Route path="/category/:catId" component={Category} /> */}
         </Switch>
         
         

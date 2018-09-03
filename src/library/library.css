@@ -1,7 +1,7 @@
 body{
 	margin:0;
 	color:#6a6f8c;
-	background:url('./hello-books-background.jpg') no-repeat center center fixed;
+	background:url('../auth-pages/hello-books-background.jpg') no-repeat center center fixed;
 	/* Full height */
     height: 100%; 
 
@@ -16,16 +16,23 @@ body{
 .clearfix:after{clear:both;display:block}
 a{color:inherit;text-decoration:none}
 
-.login-wrap{
+.book-wrap{
 	width:100%;
 	margin:auto;
-	max-width:525px;
-	min-height:670px;
+	max-width:900px;
+	min-height:1670px;
 	position:relative;
-	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
-.login-html{
+.single-book-wrap{
+	width:100%;
+	margin:auto;
+	max-width:900px;
+	min-height:450px;
+	position:relative;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.book-html{
 	width:100%;
 	height:100%;
 	position:absolute;
@@ -154,23 +161,4 @@ a{color:inherit;text-decoration:none}
 }
 .foot-lnk{
 	text-align:center;
-}
-
-/**Reset**/
-.reset-html{
-	width:100%;
-	height:100%;
-	position:absolute;
-	padding:90px 70px 50px 70px;
-	background:rgba(40,57,101,.9);
-}
-
-.reset-wrap{
-	width:100%;
-	margin:auto;
-	max-width:525px;
-	min-height:350px;
-	position:relative;
-	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
-	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }

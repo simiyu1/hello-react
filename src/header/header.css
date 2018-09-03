@@ -1,7 +1,16 @@
+.prof-area{
+    font:bold 12px Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #748c99;
+    line-height: 4;
+    text-transform: uppercase;
+}
+
 .menu-navigation-round {
     font:bold 12px Arial, Helvetica, sans-serif;
     text-align: center;
     margin-top: 30px;
+    background-color: rgba(96, 64, 32, 0.8);
 }
 
 .menu-navigation-round a {
@@ -37,3 +46,48 @@
         display:block;
     }
 }
+
+/**
+Adding user profile dropdown
+**/
+
+.userprof-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.userprof-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.userprof-dropdown:hover .userprofdropdown-content {
+    display: block;
+}
+/**End user Profile dropdown**/
+
+/**To delete**/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/**End todelete**/

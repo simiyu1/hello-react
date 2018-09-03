@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import send from '../Helper';
+import send, {saveStateToLocalStorage} from '../Helper';
 import './auth-pages.css';
 
 class Auth extends Component {
@@ -28,12 +28,20 @@ class Auth extends Component {
 		.catch(err => console.log("Error",err ))
 		.then(data => {
 			console.log(data)
+			saveStateToLocalStorage(data)
 			this.setState({
 			showAlert: !this.state.showAlert,
 			error_message: data.msg,
 			isauthenticated: true,
 			user_details: {name: "", username: data.username, email: "", password: "", confirm_password: ""}
-		  })})
+		  }),
+		  localStorage.setItem("isauthenticated", true),
+		  this.props.history.push({pathname:'/library'})
+		})
+		  .then(saveStateToLocalStorage(this.state))
+		//   .then(return(<Redirect to={location}/>)
+		  
+
 	  }
 
   render() {

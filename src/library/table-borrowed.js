@@ -1,14 +1,15 @@
 import React from 'react';
-import Book from '../book';
+import {BorrowedBook} from '../book';
 import './featured.css';
 import '../w3c.css';
 
-const FeaturedBook = (props) => {
+const TableBorrowed = (props) => {
+    localStorage.setItem("CurrentAction", "borrowed")
     if (props.book) return (
         <div className="book-wrap">
             <div className="row featuredHouse">
                 <h3 className="col-md-12 text-center">
-                    Featured Books
+                    Borrowed Books
                 </h3>
             </div>
             <div className="bookholder">
@@ -24,13 +25,13 @@ const FeaturedBook = (props) => {
                         <th>ID</th>
                         <th></th>
                     </tr></thead>
-                    {props.book.objects.map((object, i) => <Book book={object} key={i} />)}
+                    {props.book.objects.map((object, i) => <BorrowedBook book={object} key={i} />)}
                 </table>
                 </div>
             </div>
         </div>
     )
-    return (<div>No featured book at this time</div>);
+    return (<div>You have no activity yet</div>);
 }
  
-export default FeaturedBook;
+export default TableBorrowed;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FeaturedBook from './featured-book';
+import './library.css';
 
 
 class Library extends Component {
@@ -15,7 +16,10 @@ class Library extends Component {
     .then(response => response.json())
     .then(allBooks =>{
       this.allBooks = allBooks;
-      this.setState({allBooks});
+      this.setState(() => ({
+        allBooks
+      }))
+      //this.setState({allBooks});
       console.log(allBooks.objects);
     })
   }
