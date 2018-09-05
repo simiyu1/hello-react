@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './user-area.css';
-import Header, {UserHeader} from '../header';
+import Header, {UserHeader, AdminPanel} from '../header';
 import {BrowserRouter, Switch,Link, Route,Redirect} from 'react-router-dom';
 
 import Auth from '../auth-pages';
@@ -16,12 +16,14 @@ import {saveStateToLocalStorage, hydrateStateWithLocalStorage } from '../Helper'
 import CheckoutBook from '../library/checkoutbook';
 import MyReturned from '../library/myreturned';
 
+import DashBoard from '../admin-area/dashboard';
+
 import swal from 'sweetalert';
 
 const Root = () => (
   <h2> Home Component</h2>
 )
-
+// localStorage.setItem("isauthenticated","unset")
 
 const PrivateRoute = ({component: Component, ...rest}) =>(
   <Route {...rest} render={(props) => (
@@ -35,9 +37,21 @@ const PrivateRoute = ({component: Component, ...rest}) =>(
 //   fkisAuthenticated: localStorage.isauthenticated
 // }
 
-const AuthDiv = () =>(
-  localStorage.getItem("isauthenticated") === "true"
-  ? <UserHeader/>
+const AuthDiv = () =>{
+  if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")) {
+    return(<AdminPanel/>)
+  }
+  else if ((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
+    return(<UserHeader/>)
+  }
+  else{
+    return(<Header subtitle={<li><Link to='/login/'>Please login</Link></li>}/>)
+  }
+}
+
+const AuthAdminDiv = () =>(
+  ((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true"))
+  ? <DashBoard/>
   : <Header subtitle={<li><Link to='/login/'>Please login</Link></li>}/>
 )
 
@@ -69,22 +83,26 @@ class App extends Component {
   
 
   render() {
-    
+    if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
+      return(
+        <BrowserRouter>
+      <div className="App">
+      <AuthAdminDiv/>
+        {/* <Switch>
+          <Route exact path='/' component={DashBoard}/>
+          <PrivateRoute exact path='/users' component={BorrowBook}/>
+          <PrivateRoute exact path='/books' component={MyBook}/>
+        </Switch> */}
+      </div>
+    </BrowserRouter>);
+    }
+    else{
     return (
-      // <div className="container">
-      //   <Header subtitle="Hello Books"/>
-      //   <FeaturedBook book={this.state.allBooks}/>
-      // </div>
       <BrowserRouter>
       <div className="App">
       <AuthDiv/>
       {console.log("------Rendering-----",localStorage.getItem("isauthenticated"))}
         
-        {/* <ul>
-          <li><Link to='/home/'>Home</Link></li>
-          <li><Link to='/search'>Browse</Link></li>
-          <li><Link to='/login'>Login</Link></li>
-        </ul> */}
         <Switch>
           <Route exact path='/' component={Root}/>
           <Route path='/library' component={Library}/>
@@ -98,13 +116,13 @@ class App extends Component {
           <PrivateRoute exact path='/history/' component={MyHistory}/>
           <PrivateRoute exact path='/return/:id' component={ReturnBook}/>
           <PrivateRoute exact path='/reset' component={Reset}/>
-          {/* <Route path="/category/:catId" component={Category} /> */}
         </Switch>
         
         
       </div>
     </BrowserRouter>
     );
+  }
   }
 }
 

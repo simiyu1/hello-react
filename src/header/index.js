@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import {NavLink,Redirect, withRouter} from "react-router-dom";
 import './header.css';
 import swal from 'sweetalert';
 import send, {saveStateToLocalStorage} from '../Helper';
@@ -12,13 +12,13 @@ const confirmLogout= () => (
           text: "Logout",
           value: "logout",
         },
-        defeat: true,
+        Cancel: true,
       },
     })
     .then((value) => {
       switch (value) {
      
-        case "defeat":
+        case "Cancel":
           swal("Logout cancelled!");
           break;
      
@@ -41,13 +41,12 @@ const confirmLogout= () => (
     .then(response => response.json())
     .catch(err => console.log("Error",err ))
     .then(data => {
-        console.log(data)
+        console.log("Props History>>>>>>",this.props)
         saveStateToLocalStorage(data)
         localStorage.setItem("isauthenticated", false)
-        this.props.history.push({pathname:"/"})
         })
       .then(saveStateToLocalStorage(this.state)
-    )
+    ).then(<Redirect to="/" />)
    
   }
 
@@ -89,5 +88,29 @@ const UserHeader = (props) => (
     </header>
 );
 
+const AdminPanel = ()=>(
+    <div class="admin-panel clearfix">
+        <div class="slidebar">
+            <div class="logo">
+            <a href=""></a>
+            </div>
+            <ul>
+            <li><a href="#dashboard" id="targeted">Dashboard</a></li>
+            <NavLink to='/manage-library' activeClassName="selected">Library</NavLink>
+            <NavLink to='/manage-users' activeClassName="selected">Users</NavLink>
+            <NavLink to='/admin-reset' activeClassName="selected">Security</NavLink>
+            </ul>
+        </div>
+        <div class="main">
+            <ul class="topbar clearfix">
+            <li><a href="#">D</a></li>
+            <li><a href="#">L</a></li>
+            <li><a href="#">U</a></li>
+            <li><a href="#">S</a></li>
+            </ul>
+        </div>
+  </div>
+)
+
 export default Header;
-export {UserHeader};
+export {UserHeader, AdminPanel};

@@ -27,7 +27,7 @@ class Auth extends Component {
 		.then(response => response.json())
 		.catch(err => console.log("Error",err ))
 		.then(data => {
-			console.log(data)
+			console.log("The role>>>>",data.role,"<<<<<<<")
 			saveStateToLocalStorage(data)
 			this.setState({
 			showAlert: !this.state.showAlert,
@@ -35,13 +35,13 @@ class Auth extends Component {
 			isauthenticated: true,
 			user_details: {name: "", username: data.username, email: "", password: "", confirm_password: ""}
 		  }),
+		  localStorage.setItem("role", data.role),
 		  localStorage.setItem("isauthenticated", true),
-		  this.props.history.push({pathname:'/library'})
+		  localStorage.setItem("lcprops", this.props.history),
+		  this.props.history.push({pathname:'/'})
 		})
 		  .then(saveStateToLocalStorage(this.state))
-		//   .then(return(<Redirect to={location}/>)
-		  
-
+		  .then(localStorage.setItem("isauthenticated","true"))
 	  }
 
   render() {
