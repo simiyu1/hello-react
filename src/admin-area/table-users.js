@@ -3,7 +3,7 @@ import {BorrowedBook} from '../book';
 // import './featured.css';
 import '../w3c.css';
 import './usercss.css';
-import User from './user';
+import User from './single-user';
 
 const TableUser = (props) => {
     localStorage.setItem("CurrentAction", "fetch")

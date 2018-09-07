@@ -90,7 +90,7 @@ componentDidMount(){
             );
         
         }
-        return (<div>Issue with your selection</div>);
+        return (<div className="fails">Issue with your selection</div>);
     }
     
 }

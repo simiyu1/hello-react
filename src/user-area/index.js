@@ -38,10 +38,7 @@ const PrivateRoute = ({component: Component, ...rest}) =>(
 // }
 
 const AuthDiv = () =>{
-  if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")) {
-    return(<AdminPanel/>)
-  }
-  else if ((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
+  if ((localStorage.getItem("role")==="normal") && (localStorage.getItem("isauthenticated") === "true")){
     return(<UserHeader/>)
   }
   else{
@@ -57,15 +54,17 @@ const AuthAdminDiv = () =>(
 
 
 class App extends Component {
+  static defaultProps = {saveStateToLocalStorage}
 
   componentDidMount() {
-    hydrateStateWithLocalStorage();
+    // state ? hydrateStateWithLocalStorage(): state = {};
+    
 
     // add event listener to save state to localStorage
     // when user leaves/refreshes the page
     window.addEventListener(
       "beforeunload",
-      saveStateToLocalStorage()
+      this.props.saveStateToLocalStorage()
     );
   }
 
@@ -127,3 +126,4 @@ class App extends Component {
 }
 
 export default App;
+export {AuthAdminDiv, AuthDiv}

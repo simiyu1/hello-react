@@ -7,10 +7,6 @@ class CheckoutBook extends Component {
 	
 	  handleSubmit = (e) => {
         const book_id = localStorage.getItem("book_id")
-        console.log("LLLLLLLLLLLLLLLLLLLLLL",this.props)
-        // let headers = { 'Content-Type': 'application/json' }
-        // const auth_token = localStorage.getItem("auth_token")
-        // headers = Object.assign({}, headers, { Authorization: auth_token })
         e.preventDefault()
         console.log("Props<<>>>",this.props)
 		this.setState({showAlert:false})

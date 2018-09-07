@@ -70,11 +70,6 @@ componentDidMount(){
                             Returned Books
                         </h3>
                     </div>
-                    <div className="book-box">
-                        <h3 className="col-md-12 text-center">
-                            All transactions
-                        </h3>
-                    </div>
                     
                 </div>
             </div>

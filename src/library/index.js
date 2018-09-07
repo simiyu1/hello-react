@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FeaturedBook from './featured-book';
 import './library.css';
+import ManageBook from '../admin-area/manage-book';
 
 
 class Library extends Component {
@@ -25,11 +26,21 @@ class Library extends Component {
   }
 
   render() {
-    return (
+    if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
+      return (
         <div>
-        <FeaturedBook book={this.state.allBooks}/>
+          <ManageBook book={this.state.allBooks}/>
         </div>
     );
+    }
+    else{
+      return (
+        <div>
+          <FeaturedBook book={this.state.allBooks}/>
+        </div>
+    );
+    }
+    
   }
 }
 

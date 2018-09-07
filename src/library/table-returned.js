@@ -34,7 +34,7 @@ const TableReturned = (props) => {
             </div>
         </div>
     )
-    return (<div>You have no activity yet</div>);
+    return (<div className="fails">You have no activity yet</div>);
 }
  
 export default TableReturned;

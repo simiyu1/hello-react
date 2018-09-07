@@ -80,7 +80,7 @@ class Auth extends Component {
 			<div className="sign-up-htm">
 				<div className="group">
 					<label htmlFor="user" className="label">Username</label>
-					<input id="reg_username" type="text" className="input" onChange={this.handleChange}/>
+					<input id="reg_username" type="text" className="input" onChange={this.handleChange} required/>
 				</div>
 				<div className="group">
 					<label htmlFor="pass" className="label">Password</label>
@@ -91,8 +91,8 @@ class Auth extends Component {
 					<input id="confirm_password" type="password" className="input" data-type="password" onChange={this.handleChange}/>
 				</div>
 				<div className="group">
-					<label htmlFor="pass" className="label">Email Address</label>
-					<input id="reg_email" type="text" className="input" onChange={this.handleChange}/>
+					<label htmlFor="reg_email" className="label">Email Address</label>
+					<input id="reg_email" placeholder="enter email" type="email" className="input" onChange={this.handleChange} required="true"/>
 				</div>
 				<div className="group">
 					<input type="submit" className="button" value="Sign Up"/>
