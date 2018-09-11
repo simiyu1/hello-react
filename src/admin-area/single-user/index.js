@@ -9,17 +9,18 @@ class User extends Component {
         
         return (
             <tbody><tr>
-                {console.log(">>>", user)}
+                {/* {console.log(">>>", user)} */}
                 <td  className="user-th" >{user.username}</td>
                 <td  className="user-th" >{user.Role}</td>
-                <td className="price">{user.email}</td>
+                {user.logged_in ? <td className="price">Logged in</td>:
+                    <td className="">Logged out</td>}
                 <td  className="user-th" >{user.id}</td>
-                <td  className="user-th" ><div className="thisBookActions">
+                {/* <td  className="user-th" ><div className="thisBookActions">
                         <button><Link to={`/borrow/${user.id}`}>Activate</Link></button>
                         <button><Link to={`/borrow/${user.id}`}>Delete</Link></button>
                         <button><Link to={`/borrow/${user.id}`}>Deactivate</Link></button>
                     </div>
-                </td>   
+                </td>    */}
             </tr></tbody>)
     }
 }

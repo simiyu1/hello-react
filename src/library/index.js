@@ -30,6 +30,10 @@ class Library extends Component {
       return (
         <div>
           <ManageBook book={this.state.allBooks}/>
+          <div className="pagination">
+                <a href="#">❮</a>
+                <a href="#">❯</a>
+            </div>
         </div>
     );
     }
@@ -37,6 +41,10 @@ class Library extends Component {
       return (
         <div>
           <FeaturedBook book={this.state.allBooks}/>
+          <div className="pagination">
+                <a href="#">❮</a>
+                <a href="#">❯</a>
+            </div>
         </div>
     );
     }

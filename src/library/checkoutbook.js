@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import send, {saveStateToLocalStorage} from '../Helper';
 import './library.css';
+import swal from 'sweetalert';
 
 class CheckoutBook extends Component {
 
@@ -21,6 +22,7 @@ class CheckoutBook extends Component {
             error_message: data.msg
           })
           this.props.history.push({pathname:'/borrowed'})
+          swal(`You have successfully borrowed ${localStorage.getItem('title')}`)
               
         })
           .then(saveStateToLocalStorage(this.state))
@@ -37,14 +39,14 @@ class CheckoutBook extends Component {
                 
 			        <form className="sign-in-htm" onSubmit={this.handleSubmit}>
                         <div>
-                            <label>Book</label>
-                            <img src='../booklogo.png' alt="book" />
+                            <label>Book you are about to borrow;</label>
+                            
 				        </div>
                         <div className="group">
-                        {localStorage.getItem("author")}
+                        {localStorage.getItem("author")} 's book
                                 <h2>Description:</h2>
                                     {localStorage.getItem("title")} Has been written by {localStorage.getItem("author")}. 
-                                    <h2>Synopsis: </h2> 
+                                    <h2>Synopsis: </h2> No synopsis available at the moment<br/>
                                  {localStorage.getItem("ISBN")}
                         </div>
                         <div className="group">

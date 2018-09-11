@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TableHistory from './table-history';
 import send from '../Helper';
+import swal from 'sweetalert';
 
 import './library.css';
 
@@ -8,7 +9,8 @@ import './library.css';
 class MyHistory extends Component {
 	state = {
 		error_message: "",
-		this_action: "borrowed"
+    this_action: "borrowed",
+    message: "not set"
 	  }
 
   componentDidMount() {
@@ -22,10 +24,12 @@ class MyHistory extends Component {
     //fetch(url)
 
   fetchBooks = () => {
-    send({},'GET', '/api/v1/users/mybooks/?history=True', true)
+    send({},'GET', '/api/v1/users/mybooks/?theaction=true&history=true', true)
     .then(response => response.json())
     .then(allBooks =>{
       this.allBooks = allBooks;
+      console.log(">>>>>>",allBooks.message)
+      this.setState({allBooks})
       this.setState(() => ({
         allBooks
       }))
@@ -35,6 +39,10 @@ class MyHistory extends Component {
   }
 
   render() {
+    if (this.state.message == "Book not found"){
+      swal("You have not returned any book:)")
+      return(<div className="empty"> No activity here</div>);
+    }
     return (
         <div>
         <TableHistory book={this.state.allBooks}/>

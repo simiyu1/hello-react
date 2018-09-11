@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import send, {saveStateToLocalStorage} from '../Helper';
 import './library.css';
+import swal from 'sweetalert';
 
 class ReturnBook extends Component {
 
 	
 	  handleSubmit = (e) => {
         const book_id = localStorage.getItem("return_book_id")
-        // let headers = { 'Content-Type': 'application/json' }api/v1/users/books/
-        // const auth_token = localStorage.getItem("auth_token")
-        // headers = Object.assign({}, headers, { Authorization: auth_token })
-		e.preventDefault()
+        e.preventDefault()
 		this.setState({showAlert:false})
 		send(localStorage.getItem("book_id"),'PUT', '/api/v1/users/books/'+book_id, true)
 		.then(response => response.json())
@@ -18,13 +16,11 @@ class ReturnBook extends Component {
 		.then(data => {
 			console.log(data)
 			saveStateToLocalStorage(data)
-			this.setState({
-			showAlert: !this.state.showAlert,
-			error_message: data.message
-          })},
+			},
           this.props.history.push({pathname:'/history'})
         )
-		  .then(saveStateToLocalStorage(this.state))
+          .then(saveStateToLocalStorage(this.state))
+          swal(`You have successfully returned ${localStorage.getItem("title")}`);
       }
 
   render() {

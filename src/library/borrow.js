@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../booklogo.png';
 import './featured.css';
+import './library.css';
 import '../w3c.css';
 import {Link} from 'react-router-dom';
 import {saveStateToLocalStorage} from '../Helper';
@@ -48,7 +49,7 @@ componentDidMount(){
             localStorage.setItem("selected_book_id", id);
             console.log("to borrow-------", localStorage.getItem("selected_book_id"))
             return (
-            <div className="book-wrap">
+            <div className="single-book-wrap">
                 <div className="book-html">
                     <div className="row featuredHouse">
                         <h3 className="col-md-12 text-center">

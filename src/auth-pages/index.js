@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import send, {saveStateToLocalStorage} from '../Helper';
 import './auth-pages.css';
+import swal from 'sweetalert';
 
 class Auth extends Component {
 	state = {
-		user_details: {name: "", username: "", email: "", password: "", confirm_password: ""},
+		user_details: {name: "", username: "", email: "", password: "", confirm_password: "",
+						reg_username:"", reg_email:"", reg_password:"" },
 		showAlert: false,
 		error_message: "",
 		headerRequired: false,
@@ -17,7 +19,7 @@ class Auth extends Component {
 		const user_details = Object.assign({}, this.state.user_details)
 		user_details[id] = e.target.value
 		this.setState({user_details})
-	    console.log(this.state.user_details)
+	    console.log(">>>>>>",this.state.reg_email)
 	  }
 	
 	  handleSubmit = (e) => {
@@ -38,11 +40,34 @@ class Auth extends Component {
 		  localStorage.setItem("role", data.role),
 		  localStorage.setItem("isauthenticated", true),
 		  localStorage.setItem("lcprops", this.props.history),
-		  this.props.history.push({pathname:'/'})
+			this.props.history.push({pathname:'/'})
+			swal(data.message)
 		})
 		  .then(saveStateToLocalStorage(this.state))
 		  .then(localStorage.setItem("isauthenticated","true"))
 	  }
+
+	  handleSignup = (e) => {
+		e.preventDefault()
+		this.setState({showAlert:false})
+		console.log("Recieved details>>>>>>>>>>>",this.state.user_details)
+		send(this.state.user_details, 'POST', '/api/v1/auth/register', false)
+		.then(response => response.json())
+		.catch(err => console.log("Error",err ))
+		.then(regdata => {
+			console.log("After register>>>>",regdata,"<<<<<<<")
+			swal(regdata.message)
+			saveStateToLocalStorage(regdata)
+			this.setState({
+			showAlert: !this.state.showAlert,
+			error_message: regdata.msg
+		  }),
+		  localStorage.setItem("lcprops", this.props.history),
+		  this.props.history.push({pathname:'/login'})
+		})
+		  .then(saveStateToLocalStorage(this.state))
+	  }
+	  
 
   render() {
     return (
@@ -53,22 +78,16 @@ class Auth extends Component {
                 <input id="tab-2" type="radio" name="tab" className="sign-up"/><label htmlFor="tab-2" className="tab">Sign Up</label>
 		        <div className="login-form" >
 			        <form className="sign-in-htm" onSubmit={this.handleSubmit}>
-                        <div className="group">
-                            <label htmlFor="user" className="label">Username</label>
-                            <input id="username" type="text" className="input" onChange={this.handleChange} />
-				        </div>
-                        <div className="group">
-                            <label htmlFor="pass" className="label">Password</label>
-                            <input id="password" type="password" className="input" data-type="password" onChange={this.handleChange}/>
-                        </div>
 						<div className="group">
                             <label htmlFor="pass" className="label">Email</label>
                             <input id="email" type="email" className="input" data-type="text" onChange={this.handleChange}/>
                         </div>
-                        <div className="group">
-                            <input id="check" type="checkbox" className="check" checked onChange={this.handleChange}/>
-                            <label htmlFor="check"><span className="icon"></span> Keep me Signed in</label>
+						<div className="group">
+                            <label htmlFor="pass" className="label">Password</label>
+                            <input id="password" type="password" className="input" data-type="password" onChange={this.handleChange}/>
                         </div>
+						
+                        
                         <div className="group">
                             <input type="submit" className="button" value="Sign In"/>
                         </div>
@@ -77,7 +96,8 @@ class Auth extends Component {
                             <a href="#forgot">Forgot Password?</a>
                         </div>
 			        </form>
-			<div className="sign-up-htm">
+			<div className="sign-up-form">
+			<form className="sign-up-htm" onSubmit={this.handleSignup}>
 				<div className="group">
 					<label htmlFor="user" className="label">Username</label>
 					<input id="reg_username" type="text" className="input" onChange={this.handleChange} required/>
@@ -101,6 +121,7 @@ class Auth extends Component {
 				<div className="foot-lnk">
 					<label htmlFor="tab-1"><a>Already Member?</a></label>
 				</div>
+			</form>
 			</div>
 		</div>
 	</div>

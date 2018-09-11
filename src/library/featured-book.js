@@ -16,7 +16,6 @@ const FeaturedBook = (props) => {
                 <table className="booktable w3-card-4 w3-table-all">
                     <thead>
                     <tr>
-                        <th>Book</th>
                         <th>Title</th>
                         <th>Copies</th>
                         <th>Author</th>

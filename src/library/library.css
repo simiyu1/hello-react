@@ -1,7 +1,9 @@
 body{
 	margin:0;
 	color:#6a6f8c;
-	background:url('../auth-pages/hello-books-background.jpg') no-repeat center center fixed;
+	color:#ffffff;
+	opacity:0.9;
+	background:url('../auth-pages/hello-books-background.png') no-repeat center center fixed;
 	/* Full height */
     height: 100%; 
 
