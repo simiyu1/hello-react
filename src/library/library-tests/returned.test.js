@@ -37,6 +37,7 @@ describe("Library featured book displays book wrap when props recieved", ()=>{
 
   it("renders fails with no props", () => {
     const wrapper = shallow(<TableReturned/>)
-    expect(wrapper.find(".Fails")).to.have.lengthOf(1)
+    expect(wrapper.find(".fails")).to.have.lengthOf(1)
   });
+
 });

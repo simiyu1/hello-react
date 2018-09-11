@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class About extends Component {
     
-    render() {
-        return (
-            <div className="box-wrap">
-            <div className="box-html">
-                <p><b>An Open Library</b><br/><hr/>
-                                        <b>Vision</b><br/>
+  render() {
+    return (
+      <div className="box-wrap">
+        <div className="box-html">
+          <p><b>An Open Library</b><br/><hr/>
+            <b>Vision</b><br/>
                         To provide a simple window for the management of books.
 
-                                        <b>Mission</b><br/>
+            <b>Mission</b><br/>
                         Hello-Books provides a free and equitable access to library services which meet
                     the current standards of accessibility, security, and availability.
                     By this, it will encourage Libraries to adopt international standards of library
@@ -18,8 +18,8 @@ class About extends Component {
                     access to a broad range of human knowledge, experience, information and ideas 
                     in a safe, accessible and secure environment.
 
-                                        <b>Values</b>
-                    <i>Equity: Accessibility, respect and fairness
+            <b>Values</b>
+            <i>Equity: Accessibility, respect and fairness
                     Diversity: Valuing individual needs, experiences and differences
                     Intellectual Freedom: Guaranteeing and facilitating the free exchange of 
                     information and ideas in a democratic society, protecting intellectual freedom
@@ -33,10 +33,10 @@ class About extends Component {
                     expressed by the<a href="https://www.torontopubliclibrary.ca/about-the-library/mission-vision-values/">
                     Toronto Public Library</a>. 
 
-                </p>
-                </div>
-            </div>)
-    }
+          </p>
+        </div>
+      </div>)
+  }
 }
 
 export default About;

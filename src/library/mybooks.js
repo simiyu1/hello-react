@@ -4,6 +4,16 @@ import "./library.css";
 import send from "../Helper";
 import swal from "sweetalert";
 
+export const fetchBooks = () => {
+  /*Fetches all books
+
+  :Takes no parameters
+  :calls send()
+  :returns: JSON
+  */
+  return send({},"GET", "/api/v1/users/mybooks/", true).then(response => response.json())
+    
+}
 
 class MyBooks extends Component {
   /* Component to display borrowed books
@@ -15,23 +25,12 @@ class MyBooks extends Component {
 	  error_message: "",
 	  this_action: "borrowed",
 	  message: "not set"
-	  }
-
-	componentDidMount() {
-	  console.log("Mounting MyBooks");// eslint-disable-line no-console
-	  this.fetchBooks();
-	  console.log("After calling fetchBooks>>", this.state.message);// eslint-disable-line no-console
 	}
+  static defaultProps = {fetchBooks}
 
-  fetchBooks = () => {
-    /*Fetches all books
-
-    :Takes no parameters
-    :calls send()
-    :returns: JSON
-    */
-    send({},"GET", "/api/v1/users/mybooks/", true)
-      .then(response => response.json())
+  componentDidMount() {
+	  console.log("Mounting MyBooks");// eslint-disable-line no-console
+    this.props.fetchBooks()
       .then(myBooks =>{
         this.myBooks = myBooks;
         console.log(">>>>>>",myBooks.message)// eslint-disable-line no-console
@@ -43,8 +42,9 @@ class MyBooks extends Component {
         // this.setState(() => ({
         //   myBooks
         // }))
-      
+    
       })
+	  console.log("After calling fetchBooks>>", this.state.message);// eslint-disable-line no-console
   }
 
   render() {
@@ -54,7 +54,7 @@ class MyBooks extends Component {
       return(<div className="empty"> No books here</div>);
     }
     return (
-      <div>
+      <div className="table-borrowed">
         <TableBorrowed book={this.state.myBooks}/>
       </div>
     );

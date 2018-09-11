@@ -95,7 +95,7 @@ class App extends Component {
     else{
       return (
         <BrowserRouter>
-          <div className="App">
+          <div className="App userApp">
             <AuthDiv/>
             {/* {console.log("------Rendering-----",localStorage.getItem("isauthenticated"))} */}
         
