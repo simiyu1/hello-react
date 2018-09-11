@@ -14,7 +14,7 @@ class book extends Component {
     }
         
     return (
-      <tbody><tr>
+      <tbody className="singlebook"><tr>
         <td>{book.title}</td>
         <td>{book.Copies}</td>
         <td>{book.author}</td>
@@ -35,7 +35,7 @@ class BorrowedBook extends Component {
     const book = this.props.book;
         
     return (
-      <tbody><tr>
+      <tbody className="borrowed"><tr>
         <td>{book.title}</td>
         <td>{book.author}</td>
         {/* <img src={`https://images.pexels.com/photos/${book.photo}/pexels-photo-${book.photo}.jpeg?w=600&h=400&auto=compress&cs=tinysrgb`} alt="book" /> */}
@@ -55,7 +55,7 @@ class ReturnedBook extends Component {
     const book = this.props.book;
         
     return (
-      <tbody><tr>
+      <tbody className="returned"><tr>
         <td>{book.title}</td>
         <td>{book.author}</td>
         {/* <img src={`https://images.pexels.com/photos/${book.photo}/pexels-photo-${book.photo}.jpeg?w=600&h=400&auto=compress&cs=tinysrgb`} alt="book" /> */}
@@ -75,7 +75,7 @@ class HistoryBook extends Component {
     const book = this.props.book;
         
     return (
-      <tbody><tr>
+      <tbody className="history"><tr>
         <td>{book.title}</td>
         <td>{book.author}</td>
         {/* <img src={`https://images.pexels.com/photos/${book.photo}/pexels-photo-${book.photo}.jpeg?w=600&h=400&auto=compress&cs=tinysrgb`} alt="book" /> */}

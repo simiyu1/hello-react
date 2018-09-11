@@ -5,6 +5,10 @@ import swal from "sweetalert";
 
 import "./library.css";
 
+export const fetchBooks = () => {
+  return send({},"GET", "/api/v1/users/mybooks/?theaction=true&history=true", true).then(response => response.json())
+    
+}
 
 class MyHistory extends Component {
 	state = {
@@ -12,19 +16,10 @@ class MyHistory extends Component {
 	  this_action: "borrowed",
 	  message: "not set"
 	}
+  static defaultProps = {fetchBooks}
 
-	componentDidMount() {
-	  this.fetchBooks();
-	}
-	// var url = new URL('https://sl.se')
-	// var params = {lat:35.696233, long:139.570431} // or:
-	// var params = [['lat', '35.696233'], ['long', '139.570431']]
-	// url.search = new URLSearchParams(params)
-	//fetch(url)
-
-  fetchBooks = () => {
-    send({},"GET", "/api/v1/users/mybooks/?theaction=true&history=true", true)
-      .then(response => response.json())
+  componentDidMount() {
+    this.props.fetchBooks()
       .then(allBooks =>{
         this.allBooks = allBooks;
         this.setState({allBooks})
@@ -33,6 +28,13 @@ class MyHistory extends Component {
         }))
       })
   }
+  // var url = new URL('https://sl.se')
+  // var params = {lat:35.696233, long:139.570431} // or:
+  // var params = [['lat', '35.696233'], ['long', '139.570431']]
+  // url.search = new URLSearchParams(params)
+  //fetch(url)
+
+  
 
   render() {
     if (this.state.message == "Book not found"){
@@ -40,7 +42,7 @@ class MyHistory extends Component {
       return(<div className="empty"> No activity here</div>);
     }
     return (
-      <div>
+      <div className="myHistory">
         <TableHistory book={this.state.allBooks}/>
       </div>
     );

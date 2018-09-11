@@ -67,7 +67,7 @@ class DeleteBook extends Component {
          const {id} = this.props.match.params
          this.setState({book_to_delete:id})
          return (
-           <div>
+           <div className="manage-library"> 
              <Redirect to="/manage-library"/> 
            </div>);
        }
