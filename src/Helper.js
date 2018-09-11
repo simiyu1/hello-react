@@ -1,37 +1,33 @@
 
-const send = (data, method='POST', path, headerRequired=false) => {
-    const url = "http://127.0.0.1:5000"
-    var headers = {'Content-Type': 'application/json'}
-    const access_token = localStorage.getItem('auth_token')
-    //const auth_token = localStorage.getItem("auth_token")
-    if (!['undefined', null].includes(access_token) && headerRequired){
-        console.log(">>>" +access_token)
-        const token = access_token
-        console.log("<<<<<<<<<" +token)
-        headers = Object.assign({}, headers, { 'access-token' : token })
-        //headers = Object.assign({}, { access-token: token})
-    }
+const send = (data, method="POST", path, headerRequired=false) => {
+  const url = "http://127.0.0.1:5000"
+  var headers = {"Content-Type": "application/json"}
+  const access_token = localStorage.getItem("auth_token")
+  //const auth_token = localStorage.getItem("auth_token")
+  if (!["undefined", null].includes(access_token) && headerRequired){
+    const token = access_token
+    headers = Object.assign({}, headers, { "access-token" : token })
+    //headers = Object.assign({}, { access-token: token})
+  }
   
-    const no_data_methods = ['GET'];
+  const no_data_methods = ["GET"];
 
   // const myRequest = methods.includes(method) ? new Request(url + path, { method, body, headers })
   //   : new Request(url + path, { method, headers });
 
-    const myRequest = no_data_methods.includes(method) ? new Request(url + path, {
+  const myRequest = no_data_methods.includes(method) ? new Request(url + path, {
+    method: method, 
+    headers: headers
+  })
+    :
+    new Request(url + path, {
       method: method, 
+      body: JSON.stringify(data),
       headers: headers
-        })
-      :
-      new Request(url + path, {
-        method: method, 
-        body: JSON.stringify(data),
-        headers: headers
-          })
+    })
 
-    console.log(myRequest)
-  
-    return fetch(myRequest)
-  }
+  return fetch(myRequest)
+}
 
 
 
@@ -60,7 +56,6 @@ const saveStateToLocalStorage = (state) => {
   // for every item in React state
   for (let key in state) {
     // save to localStorage
-    console.log("in loop-----", key)
     localStorage.setItem(key, state[key]);
   }
 }

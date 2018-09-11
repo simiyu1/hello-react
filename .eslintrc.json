@@ -19,6 +19,7 @@
 	  "indent": [2, 2, { "SwitchCase": 1 }],
 	  "linebreak-style": ["error", "unix"],
 	  "quotes": ["error", "double"],
-	  "react/prop-types": 0
+		"react/prop-types": 0,
+		"no-mixed-spaces-and-tabs": [2, "smart-tabs"]
 	}
   }
