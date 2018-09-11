@@ -1,29 +1,28 @@
-import React, { Component } from 'react';
-import './user-area.css';
-import Header, {UserHeader, AdminPanel} from '../header';
-import {BrowserRouter, Switch,Link, Route,Redirect} from 'react-router-dom';
+import React, { Component } from "react";
+import "./user-area.css";
+import Header, {UserHeader} from "../header";
+import {BrowserRouter, Switch,Link, Route,Redirect} from "react-router-dom";
 
-import Auth from '../auth-pages';
-import Reset from '../auth-pages/reset';
-import Library from '../library';
-import BorrowBook from '../library/borrow';
-import ReturnBook from '../library/returnbook';
-import MyBook from '../library/mybooks';
-import MyHistory from '../library/myhistory';
-import About from './about';
-import ReachUs from './reach';
-import {saveStateToLocalStorage, hydrateStateWithLocalStorage } from '../Helper';
-import CheckoutBook from '../library/checkoutbook';
-import MyReturned from '../library/myreturned';
+import Auth from "../auth-pages";
+import Reset from "../auth-pages/reset";
+import Library from "../library";
+import BorrowBook from "../library/borrow";
+import ReturnBook from "../library/returnbook";
+import MyBook from "../library/mybooks";
+import MyHistory from "../library/myhistory";
+import About from "./about";
+import ReachUs from "./reach";
+import {saveStateToLocalStorage } from "../Helper";
+import CheckoutBook from "../library/checkoutbook";
+import MyReturned from "../library/myreturned";
 
-import DashBoard from '../admin-area/dashboard';
+import DashBoard from "../admin-area/dashboard";
 
-import swal from 'sweetalert';
-import Logout from '../auth-pages/logout';
+import Logout from "../auth-pages/logout";
 
 const Root = () => (
   <div>
-  <Library/>
+    <Library/>
   </div>
 )
 // localStorage.setItem("isauthenticated","unset")
@@ -31,8 +30,8 @@ const Root = () => (
 const PrivateRoute = ({component: Component, ...rest}) =>(
   <Route {...rest} render={(props) => (
     localStorage.getItem("isauthenticated") === "true"
-    ? <Component {...props}/>
-    :  <Redirect to='/login'/>
+      ? <Component {...props}/>
+      :  <Redirect to='/login'/>
   )} /> 
 )
 
@@ -51,8 +50,8 @@ const AuthDiv = () =>{
 
 const AuthAdminDiv = () =>(
   ((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true"))
-  ? <DashBoard/>
-  : <Header subtitle={<li><Link to='/login/'>Please login</Link></li>}/>
+    ? <DashBoard/>
+    : <Header subtitle={<li><Link to='/login/'>Please login</Link></li>}/>
 )
 
 
@@ -85,43 +84,42 @@ class App extends Component {
   
 
   render() {
-    console.log("The role<<<:",localStorage.getItem("role"), ":auth is:", localStorage.getItem("isauthenticated"))
     if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
       return(
         <BrowserRouter>
-      <div className="App">
-        <AuthAdminDiv/>
-      </div>
-    </BrowserRouter>);
+          <div className="App">
+            <AuthAdminDiv/>
+          </div>
+        </BrowserRouter>);
     }
     else{
-    return (
-      <BrowserRouter>
-      <div className="App">
-      <AuthDiv/>
-      {console.log("------Rendering-----",localStorage.getItem("isauthenticated"))}
+      return (
+        <BrowserRouter>
+          <div className="App">
+            <AuthDiv/>
+            {/* {console.log("------Rendering-----",localStorage.getItem("isauthenticated"))} */}
         
-        <Switch>
-          <Route exact path='/' component={Root}/>
-          <Route path='/library' component={Library}/>
-          <Route path='/login' component={Auth}/>
-          <Route path='/logout' component={Logout}/>
-          <Route path='/about' component={About}/>
-          <Route path='/reach-us' component={ReachUs}/>
-          <Route path='/checkoutbook' component={CheckoutBook}/>
-          <PrivateRoute exact path='/borrow/:id' component={BorrowBook}/>
-          <PrivateRoute exact path='/borrowed' component={MyBook}/>
-          <PrivateRoute exact path='/returned' component={MyReturned}/>
-          <PrivateRoute exact path='/history/' component={MyHistory}/>
-          <PrivateRoute exact path='/return/:id' component={ReturnBook}/>
-          <PrivateRoute exact path='/reset' component={Reset}/>
-        </Switch>
+            <Switch>
+              <Route exact path='/' component={Root}/>
+              <Route path='/library' component={Library}/>
+              <Route path='/login' component={Auth}/>
+              <Route path='/logout' component={Logout}/>
+              <Route path='/about' component={About}/>
+              <Route path='/reach-us' component={ReachUs}/>
+              <Route path='/checkoutbook' component={CheckoutBook}/>
+              <PrivateRoute exact path='/borrow/:id' component={BorrowBook}/>
+              <PrivateRoute exact path='/borrowed' component={MyBook}/>
+              <PrivateRoute exact path='/returned' component={MyReturned}/>
+              <PrivateRoute exact path='/history/' component={MyHistory}/>
+              <PrivateRoute exact path='/return/:id' component={ReturnBook}/>
+              <PrivateRoute exact path='/reset' component={Reset}/>
+            </Switch>
         
         
-      </div>
-    </BrowserRouter>
-    );
-  }
+          </div>
+        </BrowserRouter>
+      );
+    }
   }
 }
 

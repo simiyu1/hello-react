@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {BrowserRouter,Link, Switch, Route} from 'react-router-dom';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import {BrowserRouter,Link, Switch, Route} from "react-router-dom";
 
  
 const Root = () => (
@@ -24,7 +24,7 @@ class App extends Component {
             <h1 className="App-title">Welcome to React</h1>
             <p className="App-intro">
             To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
+            </p>
           </header>
           <ul>
             <li><Link to='/home/search'>Home</Link></li>
