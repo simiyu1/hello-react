@@ -28,3 +28,10 @@ input[type=text] {
 input[type=text]:focus {
     background-color: lightblue;
 }
+.edit-book-html{
+    width:100%;
+    color: #371b05;
+	height:100%;
+	position:absolute;
+	background:rgba(40,57,101,.9);
+}

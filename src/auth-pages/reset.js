@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import send, {saveStateToLocalStorage} from '../Helper';
 import './auth-pages.css';
+import swal from 'sweetalert';
 
 class Reset extends Component {
 	state = {
-		user_details: {name: "", username: "", email: "", password: "", confirm_password: ""},
+		user_details: {name: "", username: "", email: "", password: "", confirm_new_password: "", new_password:""},
 		showAlert: false,
 		error_message: "",
 		headerRequired: true,
@@ -22,17 +23,18 @@ class Reset extends Component {
 	
 	  handleSubmit = (e) => {
 		e.preventDefault()
+		console.log("Logging details>>>",this.state.user_details)
 		this.setState({showAlert:false})
-		send(this.state.user_details, 'POST', 'api/v1/auth/reset', true)
+		send(this.state.user_details, 'POST', '/api/v1/auth/reset', true)
 		.then(response => response.json())
 		.catch(err => console.log("Error",err ))
 		.then(data => {
 			console.log(data)
 			saveStateToLocalStorage(data)
+			swal(data.message," please login")
 			this.setState({
 			showAlert: !this.state.showAlert,
 			error_message: data.msg,
-			isauthenticated: true,
 			user_details: {name: "", username: data.username, email: "", password: "", confirm_password: ""}
 		  })})
 		  .then(saveStateToLocalStorage(this.state))

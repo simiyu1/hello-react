@@ -103,6 +103,7 @@ Adding user profile dropdown
 .admin-panel {
 	width: 990px;
 	margin: 50px auto;
+	color: #694242;
 }
 
 .slidebar {
@@ -253,7 +254,7 @@ Adding user profile dropdown
  
 .mainContent>div {
 	position: absolute;
-	opacity: 0;
+	opacity: 1;
 	-webkit-transition:opacity 200ms linear;
 	-moz-transition:opacity 200ms linear;
 	-ms-transition:opacity 200ms linear;
@@ -298,6 +299,9 @@ Adding user profile dropdown
 	min-width: 345px;
 	height: 262px;
 	display: inline-block;
+}
+.dashboard{
+	color: #000;
 }
 .monitor ul {
 	float: left;

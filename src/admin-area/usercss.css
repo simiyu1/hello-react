@@ -13,3 +13,6 @@
 .user-tr:nth-child(even) {
     background-color: #dddddd;
 }
+.book-box{
+    color: black;
+}

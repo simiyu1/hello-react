@@ -17,13 +17,11 @@ const TableHistory = (props) => {
                 <table className="booktable w3-card-4 w3-table-all">
                     <thead>
                     <tr>
-                        <th>Book</th>
                         <th>Title</th>
-                        <th>Copies</th>
                         <th>Author</th>
                         <th>ISBN</th>
                         <th>ID</th>
-                        <th></th>
+                        <th>status</th>
                     </tr></thead>
                     {props.book.objects.map((object, i) => <HistoryBook book={object} key={i} />)}
                 </table>

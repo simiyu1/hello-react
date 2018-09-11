@@ -16,7 +16,7 @@ class ManBook extends Component {
                 <td  className="user-th" >{book.book_id}</td>
                 <td  className="user-th" ><div className="thisBookActions">
                         <button><Link to={`/edit-book/${book.book_id}`}>Edit</Link></button>
-                        <button><Link to={`/borrow/${book.book_id}`}>Delete</Link></button>
+                        <button><Link to={`/delete/${book.book_id}`}>Delete</Link></button>
                     </div>
                 </td>   
             </tr></tbody>)

@@ -24,6 +24,7 @@ const ManageBook = (props) => {
                 </table>
                 </div>
             </div>
+            
         </div>
     )
     return (<div className="Fails">No featured book at this time</div>);

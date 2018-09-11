@@ -19,9 +19,12 @@ import MyReturned from '../library/myreturned';
 import DashBoard from '../admin-area/dashboard';
 
 import swal from 'sweetalert';
+import Logout from '../auth-pages/logout';
 
 const Root = () => (
-  <h2> Home Component</h2>
+  <div>
+  <Library/>
+  </div>
 )
 // localStorage.setItem("isauthenticated","unset")
 
@@ -82,16 +85,12 @@ class App extends Component {
   
 
   render() {
+    console.log("The role<<<:",localStorage.getItem("role"), ":auth is:", localStorage.getItem("isauthenticated"))
     if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
       return(
         <BrowserRouter>
       <div className="App">
-      <AuthAdminDiv/>
-        {/* <Switch>
-          <Route exact path='/' component={DashBoard}/>
-          <PrivateRoute exact path='/users' component={BorrowBook}/>
-          <PrivateRoute exact path='/books' component={MyBook}/>
-        </Switch> */}
+        <AuthAdminDiv/>
       </div>
     </BrowserRouter>);
     }
@@ -106,6 +105,7 @@ class App extends Component {
           <Route exact path='/' component={Root}/>
           <Route path='/library' component={Library}/>
           <Route path='/login' component={Auth}/>
+          <Route path='/logout' component={Logout}/>
           <Route path='/about' component={About}/>
           <Route path='/reach-us' component={ReachUs}/>
           <Route path='/checkoutbook' component={CheckoutBook}/>

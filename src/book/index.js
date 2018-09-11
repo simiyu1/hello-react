@@ -7,21 +7,24 @@ class book extends Component {
     
     render() {
         const book = this.props.book;
+        let borrowButton;
+        if (localStorage.getItem("isauthenticated") === "true") {
+            borrowButton = <Link to={`/borrow/${book.book_id}`}><button>Borrow</button></Link>;
+          } else {
+            borrowButton = <Link to={`/borrow/${book.book_id}`}><button>Login to Borrow</button></Link>
+          }
         
         return (
             <tbody><tr>
-                <td><img src={logo} alt="book cover"/></td>
                 {console.log(">>>", book)}
                 <td>{book.title}</td>
                 <td>{book.Copies}</td>
                 <td>{book.author}</td>
                 {/* <img src={`https://images.pexels.com/photos/${book.photo}/pexels-photo-${book.photo}.jpeg?w=600&h=400&auto=compress&cs=tinysrgb`} alt="book" /> */}
-                <td className="price">${book.ISBN}</td>
+                <td className="price">{book.ISBN}</td>
                 <td>{book.book_id}</td>
                 <td><div className="thisBookActions">
-                        <h3>Availability</h3>
-                        <h3>View Details</h3>
-                        <button><Link to={`/borrow/${book.book_id}`}>Borrow</Link></button>
+                        {borrowButton}
                     </div>
                 </td>   
             </tr></tbody>)
@@ -35,12 +38,10 @@ class BorrowedBook extends Component {
         
         return (
             <tbody><tr>
-                <td>Rate</td>
                 <td>{book.title}</td>
-                <td>{book.Copies}</td>
                 <td>{book.author}</td>
                 {/* <img src={`https://images.pexels.com/photos/${book.photo}/pexels-photo-${book.photo}.jpeg?w=600&h=400&auto=compress&cs=tinysrgb`} alt="book" /> */}
-                <td className="price">{book.ISBN}</td>
+                <td className="price">{book.isbn}</td>
                 <td>{book.book_id}</td>
                 <td><div className="thisBookActions">
                         <button><Link to={`/return/${book.book_id}`}>Return</Link></button>
@@ -57,12 +58,10 @@ class ReturnedBook extends Component {
         
         return (
             <tbody><tr>
-                <td>Rate it</td>
                 <td>{book.title}</td>
-                <td>{book.Copies}</td>
                 <td>{book.author}</td>
                 {/* <img src={`https://images.pexels.com/photos/${book.photo}/pexels-photo-${book.photo}.jpeg?w=600&h=400&auto=compress&cs=tinysrgb`} alt="book" /> */}
-                <td className="price">${book.ISBN}</td>
+                <td className="price">${book.isbn}</td>
                 <td>{book.book_id}</td>
                 <td><div className="thisBookActions">
                         {/* <button><Link to={`/borrow/${book.book_id}`}>Return</Link></button> */}
@@ -79,15 +78,16 @@ class HistoryBook extends Component {
         
         return (
             <tbody><tr>
-                <td>Rate it</td>
                 <td>{book.title}</td>
-                <td>{book.Copies}</td>
                 <td>{book.author}</td>
                 {/* <img src={`https://images.pexels.com/photos/${book.photo}/pexels-photo-${book.photo}.jpeg?w=600&h=400&auto=compress&cs=tinysrgb`} alt="book" /> */}
-                <td className="price">${book.ISBN}</td>
+                <td className="price">${book.isbn}</td>
                 <td>{book.book_id}</td>
                 <td><div className="thisBookActions">
                         {/* <button><Link to={`/borrow/${book.book_id}`}>Return</Link></button> */}
+                        {book.status ?
+                        <p>returned</p> :
+                        <p>pending</p>}
                     </div>
                 </td>   
             </tr></tbody>)

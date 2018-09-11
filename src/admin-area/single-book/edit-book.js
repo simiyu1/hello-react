@@ -14,7 +14,8 @@ class EditBook extends Component {
           ISBN: '',
           author: '',
           title: '',
-          copies: ''
+          copies: '',
+          mytitle: 'unset'
         };
         this.handleChange = this.handleChange.bind(this);
       }
@@ -27,7 +28,7 @@ class EditBook extends Component {
 	  handleSubmit = (e) => {
         const book_id = localStorage.getItem("selected_book_id")
         e.preventDefault()
-        const bookdata = {
+        let bookdata = {
             "ISBN":this.state.ISBN,
             "author":this.state.author,
             "title":this.state.title,
@@ -40,16 +41,16 @@ class EditBook extends Component {
 		.then(response => response.json())
 		.catch(err => console.log("Error",err ))
 		.then(data => {
-			console.log(data)
+			console.log("After edit<<<<<<<<<:",data)
 			saveStateToLocalStorage(data)
 			this.setState({
 			showAlert: !this.state.showAlert,
             error_message: data.message
           })
-          this.props.history.push({pathname:'/admin'})
               
         })
           .then(saveStateToLocalStorage(this.state))
+          .then(this.props.history.push({pathname:'/'}))
 
       }
 
@@ -67,18 +68,19 @@ class EditBook extends Component {
       }
     
       fetchSelectedBook = () => {
-        console.log("Selected book-------", localStorage.getItem("selected_book_id"))
+        console.log("fetch book to edit-------", localStorage.getItem("selected_book_id"))
         fetch('http://127.0.0.1:5000/api/v1/books/'+localStorage.getItem("selected_book_id"))
         .then(response => response.json())
         .then(thisBooks =>{
-          this.thisBooks = thisBooks;
+            console.log("====>", thisBooks)
+        //   this.thisBooks = thisBooks;
           this.setState(() => ({
-            thisBooks
+            ISBN: thisBooks.ISBN,
+            title: thisBooks.title,
+            author: thisBooks.author,
+            copies: thisBooks.Copies
           }));
-          console.log("Book to edit ---------", this.state.thisBooks)
-          saveStateToLocalStorage(thisBooks)
-          console.log(thisBooks.title);
-          console.log("----After Fetching single-----");
+            saveStateToLocalStorage(thisBooks)
         })
       }
       confirmDeleteBook= () => (
@@ -137,34 +139,34 @@ class EditBook extends Component {
         return (
             <div className="single-book-wrap">
 
-                <div className="book-html">
+                <div className="edit-book-html">
                     
                         <form className="edit-book" onSubmit={this.handleSubmit}>
                             <div className="row">
                                 <div className="column" >
                                     <h2>Current</h2>
                                         <label >ISBN</label>
-                                        <input type="text" id="fname" name="fname" value={localStorage.getItem("ISBN")} disabled/>
+                                        <input type="text" id="fname" name="fname" value={this.state.ISBN} disabled/>
                                         <label >Author</label>
-                                        <input type="text" id="lname" name="lname" value={localStorage.getItem("author")} disabled/>
+                                        <input type="text" id="lname" name="lname" value={this.state.author} disabled/>
                                         <label >Title</label>
-                                        <input type="text" id="fname" name="fname" value={localStorage.getItem("title")} disabled/>
+                                        <input type="text" id="fname" name="fname" value={this.state.title} disabled/>
                                         <label >Copies</label>
-                                        <input type="text" id="lname" name="lname" value={localStorage.getItem("Copies")} disabled/>
+                                        <input type="text" id="lname" name="lname" value={this.state.copies} disabled/>
                                 </div>
                                 <div className="column" >
                                     <h2>Edit</h2>
                                         <label >ISBN</label>
-                                        <input type="text" id="ISBN" name="ISBN" onChange={this.handleChange} defaultValue={localStorage.getItem("ISBN")}/>
+                                        <input type="text" id="ISBN" name="ISBN" onChange={this.handleChange} value={this.state.ISBN}/>
                                         <label >Author</label>
-                                        <input type="text" id="author" name="author" onChange={this.handleChange} defaultValue={localStorage.getItem("author")}/>
+                                        <input type="text" id="author" name="author" onChange={this.handleChange} value={this.state.author}/>
                                         <label >Title</label>
-                                        <input type="text" id="title" name="title" onChange={this.handleChange} defaultValue={localStorage.getItem("title")}/>
+                                        <input type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title}/>
                                         <label >Copies</label>
-                                        <input type="text" id="copies" name="copies" onChange={this.handleChange} defaultValue={localStorage.getItem("Copies")}/>
+                                        <input type="text" id="copies" name="copies" onChange={this.handleChange} value={this.state.copies}/>
                                         
                                 </div>
-                                
+            
                             </div>
                             <label><input type="submit" className="button" value="Save"/></label>
                         </form>

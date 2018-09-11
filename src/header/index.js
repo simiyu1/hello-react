@@ -1,54 +1,6 @@
 import React from 'react';
-import {NavLink,Redirect, withRouter} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import './header.css';
-import swal from 'sweetalert';
-import send, {saveStateToLocalStorage} from '../Helper';
-
-
-const confirmLogout= () => (
-    swal("You are about to logout", {
-      buttons: {
-        confirmLogout: {
-          text: "Logout",
-          value: "logout",
-        },
-        Cancel: true,
-      },
-    })
-    .then((value) => {
-      switch (value) {
-     
-        case "Cancel":
-          swal("Logout cancelled!");
-          break;
-     
-        case "logout":
-          handleLogout();
-          swal("Logged Out!", "see you soon", "success");
-          break;
-     
-        default:
-          swal("cancelled");
-      }
-    })
-  )
-  
-  
-  
-  const handleLogout = () => {
-    //e.preventDefault()
-    send({},'POST', '/api/v1/auth/logout', true)
-    .then(response => response.json())
-    .catch(err => console.log("Error",err ))
-    .then(data => {
-        console.log("Props History>>>>>>",this.props)
-        saveStateToLocalStorage(data)
-        localStorage.setItem("isauthenticated", false)
-        })
-      .then(saveStateToLocalStorage(this.state)
-    ).then(<Redirect to="/" />)
-   
-  }
 
 const Header = (props) => (
     <header className="row">
@@ -58,7 +10,6 @@ const Header = (props) => (
             <NavLink to="/reach-us" activeClassName="selected">Reach us</NavLink>
             <NavLink to="/about" activeClassName="selected">About</NavLink>
             <NavLink to="/login" activeClassName="selected">Login</NavLink>
-            <NavLink to='/borrow' activeClassName="selected">Borrow</NavLink>
         </nav>
         <div className="col-md-7 mt-5 subtitle">
             {props.subtitle}
@@ -77,7 +28,7 @@ const UserHeader = (props) => (
             <span className="prof-area"><i class="fa fa-user-circle-o"></i>Profile</span>
                 <div className="dropdown-content btn">
                     <NavLink to="/reset" activeClassName="selected">Reset Password</NavLink>
-                    <NavLink to="/logout" activeClassName="selected" onClick={confirmLogout}>Logout</NavLink>
+                    <NavLink to="/logout" activeClassName="selected" >Logout</NavLink>
                 </div>
             </div>  
         </nav>

@@ -1,6 +1,13 @@
 .booktable {
     border-collapse: collapse;
-    width: 80%;
+    overflow-x:auto;
+    color:#86430e;
+}
+.w3-table, .w3-table-all {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    display: table;
 }
 
 th, td {
