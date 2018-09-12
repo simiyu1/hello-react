@@ -20,7 +20,7 @@ const ManageBook = (props) => {
                 <th>ID</th>
                 <th></th>
               </tr></thead>
-            {props.book.objects.map((object, i) => <ManBook book={object} key={i} />)}
+            {props.book.objects.map((object, i) => <ManBook fetchbooks={props.fetchbooks} book={object} key={i} />)}
           </table>
         </div>
       </div>

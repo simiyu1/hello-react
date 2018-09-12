@@ -3,6 +3,7 @@ import {Redirect} from "react-router-dom";
 import send, {saveStateToLocalStorage, hydrateStateWithLocalStorage} from "../../Helper";
 import "../../library/library.css";
 import "./editbook.css";
+import {fetchBooks} from "../../library/index";
 
 import swal from "sweetalert";
 
@@ -46,7 +47,8 @@ class EditBook extends Component {
 	        this.setState({
 	          showAlert: !this.state.showAlert,
 	          error_message: data.message
-	        })
+          })
+          fetchBooks()
               
 	      })
 	      .then(saveStateToLocalStorage(this.state))

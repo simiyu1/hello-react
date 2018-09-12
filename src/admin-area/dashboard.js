@@ -40,30 +40,24 @@ class DashBoard extends Component {
               <NavLink to='/adminlogout' activeClassName="selected" >Logout</NavLink>
             </ul>
           </div>
-          <div className="main">
-            <ul className="topbar clearfix">
-              <li><a href="#">D</a></li>
-              <li><a href="#">L</a></li>
-              <li><a href="#">U</a></li>
-              <li><a href="#">S</a></li>
-            </ul>
+          {/* <div className="main">
+            
             {/* <BrowserRouter> */}
-            <div className="App">
-              <Switch>
-                <Route exact path='/' component={AdminPanel}/>
-                {/* <Route path='/admin' component={AdminPanel}/> */}
+            {/* <div className="App"> */}
+            {/* <Switch> */}
+                {/* <Route path='/admin' component={AdminPanel}/>
                 <Route path='/manage-library' component={Library}/>
                 <Route path='/manage-users/' component={ManageUser}/>
                 <Route path='/edit-book/:id' component={EditBook}/>
                 <Route path='/adminlogout' component={Logout}/>
                 <Route path='/addbook' component={AddBook}/>
                 <Route path='/admin-reset' component={Reset}/>
-                <Route path='/delete/:id' component={DeleteBook}/>
-              </Switch>
-            </div>
+                <Route path='/delete/:id' component={DeleteBook}/> */}
+              {/* </Switch> */}
+            {/* </div> */}
             {/* </BrowserRouter> */}
                         
-          </div>
+          {/* </div> */}
         </div>
       );
     }

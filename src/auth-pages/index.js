@@ -38,12 +38,27 @@ class Auth extends Component {
 		  }),
 		  localStorage.setItem("role", data.role),
 		  localStorage.setItem("isauthenticated", true),
-		  localStorage.setItem("lcprops", this.props.history),
-	        this.props.history.push({pathname:"/"})
-	        swal(data.message)
-	      })
-		  .then(saveStateToLocalStorage(this.state))
+	        localStorage.setItem("lcprops", this.props.history)})
+			
+	    if (localStorage.getItem("role")==="admin"){
+	      this.props.history.push({pathname:"/admin"})
+	      swal(localStorage.getItem("message"))
+	        .then(saveStateToLocalStorage(this.state))
 		  .then(localStorage.setItem("isauthenticated","true"))
+	    }
+	    else if (localStorage.getItem("role")=="normal"){
+	      this.props.history.push({pathname:"/"})
+	      swal(localStorage.getItem("message"))
+	        .then(saveStateToLocalStorage(this.state))
+		     .then(localStorage.setItem("isauthenticated","true"))
+	    }
+	    else {
+	      this.props.history.push({pathname:"/login"})
+	      swal(localStorage.getItem("message"))
+	      localStorage.setItem("role", ""),
+		  localStorage.setItem("isauthenticated", false)
+	    }
+	
 	  }
 
 	  handleSignup = (e) => {
