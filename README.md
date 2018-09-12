@@ -1,8 +1,4 @@
-[![Build Status](https://travis-ci.org/simiyu1/hello-react.svg?branch=master)](https://travis-ci.org/simiyu1/hello-react)
-
-[![Coverage Status](https://coveralls.io/repos/github/simiyu1/hello-react/badge.svg)](https://coveralls.io/github/simiyu1/hello-react)
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/35e8f37ac29c4fd8a44ab6040438ffc5)](https://www.codacy.com/app/simiyu1/hello-react?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=simiyu1/hello-react&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/simiyu1/hello-react.svg?branch=master)](https://travis-ci.org/simiyu1/hello-react)[![Coverage Status](https://coveralls.io/repos/github/simiyu1/hello-react/badge.svg?branch=ch%2Freadme)](https://coveralls.io/github/simiyu1/hello-react?branch=ch%2Freadme)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/35e8f37ac29c4fd8a44ab6040438ffc5)](https://www.codacy.com/app/simiyu1/hello-react?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=simiyu1/hello-react&amp;utm_campaign=Badge_Grade)
 
 # hello Books client
 
