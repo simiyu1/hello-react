@@ -4,7 +4,7 @@ import {expect} from "chai";
 import {NavLink, MemoryRouter} from "react-router-dom";
 import Adapter from "enzyme-adapter-react-16";
 import DashBoard from "../../admin-area/dashboard";
-import App, { AuthAdminDiv, AuthDiv, UserHeader, Header } from "../../user-area";
+import App, { AuthAdminDiv, AuthDiv, UserHeader, Header } from '../../user-area';
 
 configure({ adapter: new Adapter() });
 

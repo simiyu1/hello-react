@@ -8,6 +8,7 @@ import HistoryTable from "../table-history";
 import TableBorrowed from "../table-borrowed";
 import TableReturned from "../table-returned";
 import Book from "../../book/index";
+import CheckoutBook from "../checkoutbook";
 
 configure({ adapter: new Adapter() });
 
@@ -72,5 +73,10 @@ describe("Library featured book displays book wrap when props recieved", ()=>{
   it("return render fails with no props", () => {
     const wrapper = shallow(<TableReturned/>)
     expect(wrapper.find(".fails")).to.have.lengthOf(1)
+  });
+
+  it("return renders Checkout", () => {
+    const wrapper = shallow(<CheckoutBook/>)
+    expect(wrapper.find(".single-book-wrap")).to.have.lengthOf(1)
   });
 });
