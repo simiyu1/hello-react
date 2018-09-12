@@ -5,6 +5,8 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 ## Table of Contents
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d5c91223906e47549b1a3e7f765fc488)](https://app.codacy.com/app/simiyu1/hello-react?utm_source=github.com&utm_medium=referral&utm_content=simiyu1/hello-react&utm_campaign=Badge_Grade_Dashboard)
+
 - [Updating to New Releases](#updating-to-new-releases)
 - [Sending Feedback](#sending-feedback)
 - [Folder Structure](#folder-structure)
