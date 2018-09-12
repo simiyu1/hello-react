@@ -58,7 +58,7 @@ class Logout extends Component {
      }
      render() {
        return (
-         <div>
+         <div className="logout">
            <Redirect to="/"/> 
          </div>)
         

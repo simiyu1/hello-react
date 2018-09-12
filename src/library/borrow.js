@@ -6,7 +6,10 @@ import "../w3c.css";
 import {Link} from "react-router-dom";
 import {saveStateToLocalStorage} from "../Helper";
 
-
+export const fetchSelectedBook = () => {
+    return fetch("http://127.0.0.1:5000/api/v1/books/"+localStorage.getItem("selected_book_id")).then(response => response.json())
+      
+  }
 class BorrowBook extends Component {
     state = { selected_book_id: "",
       thisBooks:{
@@ -17,14 +20,10 @@ class BorrowBook extends Component {
         message: ""
       }
     }
+    static defaultProps = {fetchSelectedBook}
 
     componentDidMount(){
-      this.fetchSelectedBook();
-    }
-
-  fetchSelectedBook = () => {
-    fetch("http://127.0.0.1:5000/api/v1/books/"+localStorage.getItem("selected_book_id"))
-      .then(response => response.json())
+      this.props.fetchSelectedBook()
       .then(thisBooks =>{
         this.thisBooks = thisBooks;
         this.setState(() => ({
@@ -32,8 +31,7 @@ class BorrowBook extends Component {
         }));
         saveStateToLocalStorage(thisBooks)
       })
-  }
-    
+    }    
     
      
   render() {
