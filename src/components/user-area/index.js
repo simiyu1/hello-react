@@ -84,6 +84,7 @@ class App extends Component {
   
 
   render() {
+    console.log(typeof localStorage.getItem("isauthenticated"))
     if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
       return(
         <BrowserRouter>
@@ -94,7 +95,7 @@ class App extends Component {
     }
     else{
       return (
-        <BrowserRouter>
+        <BrowserRouter >
           <div className="App userApp">
             <AuthDiv/>
             {/* {console.log("------Rendering-----",localStorage.getItem("isauthenticated"))} */}

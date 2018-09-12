@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import send, {saveStateToLocalStorage} from "../Helper";
 import "./auth-pages.css";
-import swal from "sweetalert";
+import swal from 'sweetalert';
 
 class Auth extends Component {
 	state = {
@@ -34,16 +34,16 @@ class Auth extends Component {
 	          showAlert: !this.state.showAlert,
 	          error_message: data.msg,
 	          isauthenticated: true,
-	          user_details: {name: "", username: data.username, email: "", password: "", confirm_password: ""}
-		  }),
-		  localStorage.setItem("role", data.role),
-		  localStorage.setItem("isauthenticated", true),
-		  localStorage.setItem("lcprops", this.props.history),
-	        this.props.history.push({pathname:"/"})
-	        swal(data.message)
+						user_details: {name: "", username: data.username, email: "", password: "", confirm_password: ""}
+					}),
+					localStorage.setItem("role", data.role),
+					localStorage.setItem("isauthenticated", true),
+					localStorage.setItem("lcprops", this.props.history),
+					this.props.history.push({pathname:"/"})
+					swal(data.message)
 	      })
-		  .then(saveStateToLocalStorage(this.state))
-		  .then(localStorage.setItem("isauthenticated","true"))
+		  // .then(saveStateToLocalStorage(this.state))
+		  // .then(localStorage.setItem("isauthenticated","true"))
 	  }
 
 	  handleSignup = (e) => {
