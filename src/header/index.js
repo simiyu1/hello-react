@@ -3,23 +3,21 @@ import {NavLink} from "react-router-dom";
 import "./header.css";
 
 const Header = (props) => (
-  <header className="row">
-    <nav className="menu-navigation-round">
+  <div className="myheader">
+    <ul>
       <NavLink to="/" exact activeClassName="selected" >Home</NavLink>
       <NavLink to="/library" activeClassName="selected" >Library</NavLink>
       <NavLink to="/reach-us" activeClassName="selected">Reach us</NavLink>
       <NavLink to="/about" activeClassName="selected">About</NavLink>
       <NavLink to="/login" activeClassName="selected">Login</NavLink>
-    </nav>
-    <div className="col-md-7 mt-5 subtitle">
-      {props.subtitle}
-    </div>
-  </header>
+    </ul>
+    {props.subtitle}
+  </div>
 );
 
 const UserHeader = (props) => (
-  <header className="row">
-    <nav className="menu-navigation-round">
+  <div className="userheader">
+    <ul>
       <NavLink to='/library' activeClassName="selected">Library</NavLink>
       <NavLink to="/borrowed" activeClassName="selected" >Borrowed</NavLink>
       <NavLink to="/returned" activeClassName="selected">Returned</NavLink>
@@ -30,38 +28,24 @@ const UserHeader = (props) => (
           <NavLink to="/reset" activeClassName="selected">Reset Password</NavLink>
           <NavLink to="/logout" activeClassName="selected" >Logout</NavLink>
         </div>
-      </div>  
-    </nav>
-        
-    <div className="col-md-7 mt-5 subtitle">
-      {props.subtitle}
-    </div>
-  </header>
+      </div>
+    </ul>
+    {props.subtitle}
+  </div>
 );
 
-const AdminPanel = ()=>(
-  <div className="admin-panel clearfix">
-    <div className="slidebar">
-      <div className="logo">
-        <a href=""></a>
-      </div>
-      <ul>
-        <li><a href="#dashboard" id="targeted">Dashboard</a></li>
-        <NavLink to='/manage-library' activeClassName="selected">Library</NavLink>
-        <NavLink to='/manage-users' activeClassName="selected">Users</NavLink>
-        <NavLink to='/admin-reset' activeClassName="selected">Security</NavLink>
-      </ul>
-    </div>
-    <div className="main">
-      <ul className="topbar clearfix">
-        <li><a href="#">D</a></li>
-        <li><a href="#">L</a></li>
-        <li><a href="#">U</a></li>
-        <li><a href="#">S</a></li>
-      </ul>
-    </div>
+const AdminHeader = ()=>(
+  <div className="adminheader">
+    <ul>
+      <NavLink to='/' activeClassName="selected">DashBoard</NavLink>
+      <NavLink to='/manage-library' activeClassName="selected">Library</NavLink>
+      <NavLink to='/addbook' activeClassName="selected">Add Book</NavLink>
+      <NavLink to='/manage-users/' activeClassName="selected">Users</NavLink>
+      <NavLink to='/admin-reset' activeClassName="selected">Security</NavLink>
+      <NavLink to='/adminlogout' activeClassName="selected" >Logout</NavLink>
+    </ul>
   </div>
 )
 
 export default Header;
-export {UserHeader, AdminPanel};
+export {UserHeader, AdminHeader};

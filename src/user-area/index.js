@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./user-area.css";
-import Header, {UserHeader} from "../header";
+import Header, {UserHeader, AdminHeader} from "../header";
 import {BrowserRouter, Switch,Link, Route,Redirect} from "react-router-dom";
 
 import Auth from "../auth-pages";
@@ -15,8 +15,6 @@ import ReachUs from "./reach";
 import {saveStateToLocalStorage } from "../Helper";
 import CheckoutBook from "../library/checkoutbook";
 import MyReturned from "../library/myreturned";
-
-import DashBoard from "../admin-area/dashboard";
 import AdminPanel from "../admin-area/admin-panel";
 import ManageUser from "../admin-area/manage-users";
 import EditBook from "../admin-area/single-book/edit-book";
@@ -40,6 +38,13 @@ const PrivateRoute = ({component: Component, ...rest}) =>(
       :  <Redirect to='/login'/>
   )} /> 
 )
+const AdminRoute = ({component: Component, ...rest}) =>(
+  <Route {...rest} render={(props) => (
+    localStorage.getItem("isauthenticated") === "true"
+      ? <Component {...props}/>
+      :  <Redirect to='/login'/>
+  )} /> 
+)
 
 // const CheckAuth={
 //   fkisAuthenticated: localStorage.isauthenticated
@@ -50,7 +55,7 @@ const AuthDiv = () =>{
     return(<UserHeader/>)
   }
   else if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
-    return(<DashBoard/>)
+    return(<AdminHeader/>)
   }
   else {
     return(<Header subtitle={<li><Link to='/login/'>Please login</Link></li>}/>)
@@ -87,48 +92,44 @@ class App extends Component {
   
 
   render() {
-    // if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
-    //   return(
-    //     <BrowserRouter>
-    //       <div className="App">
-    //         <AuthAdminDiv/>
-    //       </div>
-    //     </BrowserRouter>);
-    // }
-    // else{
     return (
       <BrowserRouter>
         <div className="App userApp">
-          <AuthDiv/>
-          {/* {console.log("------Rendering-----",localStorage.getItem("isauthenticated"))} */}
-        
-          <Switch>
-            <Route exact path='/' component={Root}/>
-            <Route path='/library' component={Library}/>
-            <Route path='/admin' component={DashBoard}/>
-            <Route path='/login' component={Auth}/>
-            <Route path='/logout' component={Logout}/>
-            <Route path='/about' component={About}/>
-            <Route path='/reach-us' component={ReachUs}/>
-            <Route path='/checkoutbook' component={CheckoutBook}/>
-            <PrivateRoute exact path='/borrow/:id' component={BorrowBook}/>
-            <PrivateRoute exact path='/borrowed' component={MyBook}/>
-            <PrivateRoute exact path='/returned' component={MyReturned}/>
-            <PrivateRoute exact path='/history/' component={MyHistory}/>
-            <PrivateRoute exact path='/return/:id' component={ReturnBook}/>
-            <PrivateRoute exact path='/reset' component={Reset}/>
-            <Route exact path='/admin' component={AdminPanel}/>
-            <Route path='/admin' component={AdminPanel}/>
-            <Route path='/manage-library' component={Library}/>
-            <Route path='/manage-users/' component={ManageUser}/>
-            <Route path='/edit-book/:id' component={EditBook}/>
-            <Route path='/adminlogout' component={Logout}/>
-            <Route path='/addbook' component={AddBook}/>
-            <Route path='/admin-reset' component={Reset}/>
-            <Route path='/delete/:id' component={DeleteBook}/>
-          </Switch>
-        
-        
+          <div className="admin-panel clearfix">
+            <div className="slidebar">
+              <div className="logo">
+                <a href=""></a>
+              </div>
+              <AuthDiv/>
+            </div>
+            <div className="main">
+              <div className="App">
+                <Switch>
+                  <Route exact path='/' component={Root}/>
+                  <Route path='/library' component={Library}/>
+                  <Route path='/login' component={Auth}/>
+                  <Route path='/logout' component={Logout}/>
+                  <Route path='/about' component={About}/>
+                  <Route path='/reach-us' component={ReachUs}/>
+                  <Route path='/checkoutbook' component={CheckoutBook}/>
+                  <PrivateRoute exact path='/borrow/:id' component={BorrowBook}/>
+                  <PrivateRoute exact path='/borrowed' component={MyBook}/>
+                  <PrivateRoute exact path='/returned' component={MyReturned}/>
+                  <PrivateRoute exact path='/history/' component={MyHistory}/>
+                  <PrivateRoute exact path='/return/:id' component={ReturnBook}/>
+                  <PrivateRoute exact path='/reset' component={Reset}/>
+                  <AdminRoute exact path='/admin' component={AdminPanel}/>
+                  <AdminRoute path='/manage-library' component={Library}/>
+                  <AdminRoute path='/manage-users/' component={ManageUser}/>
+                  <AdminRoute path='/edit-book/:id' component={EditBook}/>
+                  <AdminRoute path='/adminlogout' component={Logout}/>
+                  <AdminRoute path='/addbook' component={AddBook}/>
+                  <AdminRoute path='/admin-reset' component={Reset}/>
+                  <AdminRoute path='/delete/:id' component={DeleteBook}/>
+                </Switch>
+              </div>
+            </div>
+          </div>
         </div>
       </BrowserRouter>
     );
