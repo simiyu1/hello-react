@@ -15,14 +15,24 @@ body{
 .clearfix:after,.clearfix:before{content:'';display:table}
 .clearfix:after{clear:both;display:block}
 a{color:inherit;text-decoration:none}
-
+.white-text{
+	color: #fff;
+}
 .login-wrap{
 	width:100%;
 	margin:auto;
-	max-width:525px;
-	min-height:670px;
+	max-width:400px;
+	min-height:570px;
 	position:relative;
 	background:url(https://raw.githubusercontent.com/khadkamhn/day-01-login-form/master/img/bg.jpg) no-repeat center;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.mylogin-wrap{
+	width:100%;
+	margin:auto;
+	max-width:900px;
+	min-height:570px;
+	position:relative;
 	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
 .login-html{

@@ -4,7 +4,8 @@ import "../library/featured.css";
 import "../w3c.css";
 
 const ManageBook = (props) => {
-  if (props.book) return (
+
+  if (props.book && props.handler) return (
     <div className="book-wrap">
       <div className="row featuredHouse">
                 
@@ -20,7 +21,7 @@ const ManageBook = (props) => {
                 <th>ID</th>
                 <th></th>
               </tr></thead>
-            {props.book.objects.map((object, i) => <ManBook fetchbooks={props.fetchbooks} book={object} key={i} />)}
+            {props.book.objects.map((object, i) => <ManBook handler={props.handler} fetchbooks={props.fetchbooks} book={object} key={i} />)}
           </table>
         </div>
       </div>

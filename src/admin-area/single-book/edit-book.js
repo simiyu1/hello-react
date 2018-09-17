@@ -48,7 +48,7 @@ class EditBook extends Component {
 	          showAlert: !this.state.showAlert,
 	          error_message: data.message
           })
-          fetchBooks()
+          this.now.fetchBooks()
               
 	      })
 	      .then(saveStateToLocalStorage(this.state))
@@ -145,7 +145,7 @@ class EditBook extends Component {
                     
                 <form className="edit-book" onSubmit={this.handleSubmit}>
                   <div className="row">
-                    <div className="column" >
+                    {/* <div className="column" >
                       <h2>Current</h2>
                       <label >ISBN</label>
                       <input type="text" id="fname" name="fname" value={this.state.ISBN} disabled/>
@@ -155,7 +155,7 @@ class EditBook extends Component {
                       <input type="text" id="fname" name="fname" value={this.state.title} disabled/>
                       <label >Copies</label>
                       <input type="text" id="lname" name="lname" value={this.state.copies} disabled/>
-                    </div>
+                    </div> */}
                     <div className="column" >
                       <h2>Edit</h2>
                       <label >ISBN</label>
@@ -166,11 +166,11 @@ class EditBook extends Component {
                       <input type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title}/>
                       <label >Copies</label>
                       <input type="text" id="copies" name="copies" onChange={this.handleChange} value={this.state.copies}/>
-                                        
+                      <label><input type="submit" className="btn btn-default" value="Save"/></label>    
                     </div>
             
                   </div>
-                  <label><input type="submit" className="button" value="Save"/></label>
+                  
                 </form>
               </div>
             </div>  

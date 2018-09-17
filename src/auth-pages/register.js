@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import send, {saveStateToLocalStorage} from "../Helper";
+import {Link} from "react-router-dom";
 import "./auth-pages.css";
 import swal from "sweetalert";
 
-class Auth extends Component {
+class Register extends Component {
 	state = {
 	  user_details: {name: "", username: "", email: "", password: "", confirm_password: "",
 	    reg_username:"", reg_email:"", reg_password:"" },
@@ -13,7 +14,7 @@ class Auth extends Component {
 	  redirectToReferrer:false,
 	  isauthenticated: false
 	  }
-	
+	 
 	  handleChange = (e) => {
 	    const id = e.target.id
 	    const user_details = Object.assign({}, this.state.user_details)
@@ -45,40 +46,49 @@ class Auth extends Component {
 
 	  render() {
 	    return (
-	      <div className="login-wrap">
+	      <div className="outer-div">
+	        <div className="inner-div">
 
-	        <div className="login-html">
-	          <div className="sign-up-form">
-	              <form className="sign-up-htm" onSubmit={this.handleSignup}>
-	                <div className="group">
-	                  <label htmlFor="user" className="label">Username</label>
-	                  <input id="reg_username" type="text" className="input" onChange={this.handleChange} required/>
+	      <div className="text-center mypad">
+	        <div className="logo">register</div>
+
+	        <div className="login-form-1">
+	          <form id="register-form" className="text-left" onSubmit={this.handleSignup}>
+	            <div className="login-form-main-message"></div>
+	            <div className="main-login-form">
+	              <div className="login-group">
+				
+	                <div className="form-group">
+	                  <label htmlFor="reg_email" className="sr-only">Email</label>
+	                  <input type="text" className="form-control" id="reg_email" name="reg_email" placeholder="email" onChange={this.handleChange}/>
 	                </div>
-	                <div className="group">
-	                  <label htmlFor="pass" className="label">Password</label>
-	                  <input id="reg_password" type="password" className="input" data-type="password" onChange={this.handleChange}/>
+	                <div className="form-group">
+	                  <label htmlFor="reg_password" className="sr-only">Password</label>
+	                  <input type="password" className="form-control" id="reg_password" name="reg_password" placeholder="password" onChange={this.handleChange}/>
 	                </div>
-	                <div className="group">
-	                  <label htmlFor="pass" className="label">Repeat Password</label>
-	                  <input id="confirm_password" type="password" className="input" data-type="password" onChange={this.handleChange}/>
+	                <div className="form-group">
+	                  <label htmlFor="reg_password_confirm" className="sr-only">Password Confirm</label>
+	                  <input type="password" className="form-control" id="confirm_password" name="reg_password_confirm" placeholder="confirm password" onChange={this.handleChange}/>
 	                </div>
-	                <div className="group">
-	                  <label htmlFor="reg_email" className="label">Email Address</label>
-	                  <input id="reg_email" placeholder="enter email" type="email" className="input" onChange={this.handleChange} required="true"/>
+				
+	                <div className="form-group login-group-checkbox">
+	                  <input type="checkbox" className="" id="reg_agree" name="reg_agree"/>
+	                  <label htmlFor="reg_agree">i agree with <a href="#">terms</a></label>
 	                </div>
-	                <div className="group">
-	                  <input type="submit" className="button" value="Sign Up"/>
-	                </div>
-	                <div className="hr"></div>
-	                <div className="foot-lnk">
-	                  <label htmlFor="tab-1"><a>Already Member?</a></label>
-	                </div>
-	              </form>
+	              </div>
+	              <button type="submit" className="login-button"><i className="fa fa-chevron-right"></i></button>
 	            </div>
-	          </div>
+	            <div className="etc-login-form">
+	              <p>already have an account? <Link to="/login">login here</Link></p>
+	            </div>
+	          </form>
 	        </div>
+
+	      </div>
+	        </div>
+	      </div>
 	    );
 	  }
 }
 
-export default Auth;
+export default Register;

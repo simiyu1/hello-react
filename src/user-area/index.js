@@ -22,6 +22,7 @@ import AddBook from "../admin-area/single-book/add-book";
 import DeleteBook from "../admin-area/single-book/delete-book";
 import swal from "sweetalert";
 import Logout from "../auth-pages/logout";
+import Register from "../auth-pages/register";
 
 
 const Root = () => (
@@ -40,7 +41,7 @@ const PrivateRoute = ({component: Component, ...rest}) =>(
 )
 const AdminRoute = ({component: Component, ...rest}) =>(
   <Route {...rest} render={(props) => (
-    localStorage.getItem("isauthenticated") === "true"
+    ((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true"))
       ? <Component {...props}/>
       :  <Redirect to='/login'/>
   )} /> 
@@ -108,6 +109,7 @@ class App extends Component {
                   <Route exact path='/' component={Root}/>
                   <Route path='/library' component={Library}/>
                   <Route path='/login' component={Auth}/>
+                  <Route path='/register' component={Register}/>
                   <Route path='/logout' component={Logout}/>
                   <Route path='/about' component={About}/>
                   <Route path='/reach-us' component={ReachUs}/>
