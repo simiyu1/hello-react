@@ -14,7 +14,7 @@ jest.mock("react-router-dom");
 describe("The Authentification page is displayed", ()=>{
   it("renders Auth", () => {
     const wrapper = mount(<Auth/>)
-    expect(wrapper.find(".login-wrap")).to.have.lengthOf(1)
+    expect(wrapper.find(".outer-div")).to.have.lengthOf(1)
   });
 
   it("renders logout", () => {

@@ -23,7 +23,7 @@ class About extends Component {
                     Diversity: Valuing individual needs, experiences and differences
                     Intellectual Freedom: Guaranteeing and facilitating the free exchange of 
                     information and ideas in a democratic society, protecting intellectual freedom
-                    and respecting individuals' rights to privacy and choice
+                    and respecting individuals rights to privacy and choice
                     Innovation: Encouraging creativity, experimentation and the generation of ideas
                     Inclusion: Welcoming participation in decision making and service development by
                     residents and communities

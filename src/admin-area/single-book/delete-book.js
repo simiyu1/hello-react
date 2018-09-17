@@ -53,6 +53,12 @@ class DeleteBook extends Component {
          .catch(err => console.log("Error",err ))// eslint-disable-line no-console
          .then(data => {
            saveStateToLocalStorage(data)
+           if(data.message === "Books retrieved"){
+             swal("Book deleted successfully")
+           }
+           else{
+             swal(data.message)
+           }
            this.props.history.push("manage-library")
          })
          .then(saveStateToLocalStorage(this.state)

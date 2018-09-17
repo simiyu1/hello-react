@@ -3,7 +3,7 @@ import { mount, configure} from "enzyme";
 import Book from "../index";
 import Adapter from "enzyme-adapter-react-16";
 import {expect} from "chai";
-import {Router} from "react-router-dom";
+import {MemoryRouter} from "react-router-dom";
 
 configure({ adapter: new Adapter() });
 jest.mock("react-router-dom");
@@ -25,8 +25,8 @@ localStorageMock.setItem("isauthenticated","true");
 
 describe("A single row of book details is displayed when props recieved", ()=>{
   it("renders theBook", () => {
-    const wrapper = mount(<Router><Book book={defaultProps}/></Router>)
-    expect(wrapper.find(".singlebook")).to.have.lengthOf(0)
+    const wrapper = mount(<Book book={defaultProps}/>)
+    expect(wrapper.find(".singlebook")).to.have.lengthOf(1)
   });
 });
 

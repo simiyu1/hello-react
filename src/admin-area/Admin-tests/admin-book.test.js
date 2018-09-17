@@ -12,6 +12,24 @@ import EditBook from "../single-book/edit-book";
 configure({ adapter: new Adapter() });
 jest.mock("react-router-dom");
 
+const handlerf = {
+  handler() {
+    console.log("handler called")
+    this.setState({
+      messageShown: "true"
+    });
+    this.props.fetchBooks()
+      .then(allBooks =>{
+        this.allBooks = allBooks;
+        this.setState(() => ({
+          allBooks
+        }))
+        //this.setState({allBooks});
+        console.log(allBooks.objects);// eslint-disable-line no-console
+        console.log("handling--------");
+      })
+  }
+}
 const defaultProps = {
   objects: [
     {
@@ -37,7 +55,7 @@ localStorageMock.setItem("isauthenticated","true");
 
 describe("A single row of book details is displayed when props recieved", ()=>{
   it("renders the Book", () => {
-    const wrapper = mount(<ManageBook book={defaultProps}/>)
+    const wrapper = mount(<MemoryRouter><ManageBook book={defaultProps} handler={handlerf}/></MemoryRouter>)
     expect(wrapper.find(".book-wrap")).to.have.lengthOf(1)
   });
 

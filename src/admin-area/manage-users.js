@@ -31,8 +31,10 @@ class ManageUsers extends Component {
 
     render() {
       return (
+        <div className="main">
         <div>
           <TableUser users={this.state.allUsers}/>
+        </div>
         </div>
       );
     }

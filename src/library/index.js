@@ -2,19 +2,48 @@ import React, { Component } from "react";
 import FeaturedBook from "./featured-book";
 import "./library.css";
 import ManageBook from "../admin-area/manage-book";
+import Send from "../Helper";
 
-
+export const fetchBooks = () => {
+  return Send({},"GET","/api/v1/books/",false).then(response => response.json())
+    
+}
 class Library extends Component {
-	state = { }
+  constructor(props) {
+    super(props)
 
-	componentDidMount() {
+    // Bind the this context to the handler function
+    this.handler = this.handler.bind(this);
+
+    // Set some state
+    this.state = {
+      messageShown: "false"
+    };
+    
+  }
+ 
+  handler() {
+    console.log("handler called")
+    this.setState({
+      messageShown: "true"
+    });
+    this.props.fetchBooks()
+      .then(allBooks =>{
+        this.allBooks = allBooks;
+        this.setState(() => ({
+          allBooks
+        }))
+        //this.setState({allBooks});
+        console.log(allBooks.objects);// eslint-disable-line no-console
+        console.log("handling--------");
+      })
+  }
+  
+	// state = { }
+  static defaultProps = {fetchBooks}
+  componentDidMount() {
 	  console.log("Mounting");// eslint-disable-line no-console
-	  this.fetchBooks();
-	}
-
-  fetchBooks = () => {
-    fetch("http://127.0.0.1:5000/api/v1/books/")
-      .then(response => response.json())
+    this.props.fetchBooks()
       .then(allBooks =>{
         this.allBooks = allBooks;
         this.setState(() => ({
@@ -24,12 +53,15 @@ class Library extends Component {
         console.log(allBooks.objects);// eslint-disable-line no-console
       })
   }
+ 
+  
 
   render() {
     if((localStorage.getItem("role")==="admin") && (localStorage.getItem("isauthenticated") === "true")){
       return (
         <div>
-          <ManageBook book={this.state.allBooks}/>
+          <p>{this.state.messageShown}</p>
+          <ManageBook book={this.state.allBooks} fetchbooks={this.props.fetchBooks} handler={this.handler}/>
           <div className="pagination">
             <a href="#">❮</a>
             <a href="#">❯</a>

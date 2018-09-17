@@ -70,12 +70,12 @@ class AddBook extends Component {
 	                <input type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title}/>
 	                <label >Copies</label>
 	                <input type="text" id="copies" name="copies" onChange={this.handleChange} value={this.state.copies}/>
-                                        
+									<label><input type="submit" className="btn btn-default" value="Save"/></label>                    
 	              </div>
             
 	            </div>
 	            <div className="row">
-	              <label><input type="submit" className="button" value="Save"/></label>
+	              
 	            </div>
 	          </form>
 	        </div>
