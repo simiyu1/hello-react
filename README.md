@@ -4,9 +4,9 @@
 
 Hello Books is an Open Source Library management platform built in react. This product allows for a smooth experience in tracking borrowed books, editing the available book titles, deleting books from circulation and viewing all active users by library management. Users, on the other hand, can view avaliable books, create accounts, borrow books and return them.
 
-This product is live at url: 
-and it is consuming the api at url: 
-The api source and documentation is at url:
+This product is live at [this url.](https://floating-hamlet-71422.herokuapp.com/ ) 
+and it is consuming the api at [this url.](https://young-forest-39178.herokuapp.com ) 
+The api source and documentation is at [this url.](https://github.com/simiyu1/hello-react ) 
 
 ## Instalation 
 

@@ -29,19 +29,3 @@ describe("A single row of book details is displayed when props recieved", ()=>{
     expect(wrapper.find(".singlebook")).to.have.lengthOf(1)
   });
 });
-
-// describe ("Single book",() =>  {
-//   it("single book", ()=>{
-//     const singlebook = {
-//       "title":"title",
-//       "author":"author",
-//       "Copies":"Copies",
-//       "book_id":"book_id",
-//       "ISBN":"ISBN"
-//     }
-//     // const component = mount(<Book/>);
-//     // expect(component.state().single.toEqual(singlebook))
-//     const wrapper = shallow(<Book book={singlebook}/>)
-//     expect(wrapper.find(".theBook")).to.have.lengthOf(0)
-//   })
-// })
